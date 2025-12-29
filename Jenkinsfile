@@ -1,17 +1,18 @@
 pipeline {
     agent any
     stages {
-        stage('Install Tools') {
+        stage('Create Venv') {
             steps {
                 sh '''
-                python3 --version
-                pip3 install --user pytest pytest-cov
+                python3 -m venv venv
+                ./venv/bin/pip install --upgrade pip
+                ./venv/bin/pip install pytest pytest-cov
                 '''
             }
         }
         stage('Run Tests with Coverage') {
             steps {
-                sh '~/.local/bin/pytest --cov=. --cov-report=term > coverage.txt'
+                sh './venv/bin/pytest --cov=. --cov-report=term > coverage.txt'
             }
         }
         stage('Fail if Coverage < 80%') {

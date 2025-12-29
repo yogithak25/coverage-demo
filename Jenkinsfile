@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sh '''
                 export PYTHONPATH=$PWD
-                ./venv/bin/pytest tests--cov=app --cov-report=term > coverage.txt
+                ./venv/bin/pytest tests --cov=app --cov-report=term > coverage.txt
                 '''
             }
         }

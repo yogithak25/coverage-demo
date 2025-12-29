@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Run Tests with Coverage') {
             steps {
-                sh './venv/bin/pytest --cov=. --cov-report=term > coverage.txt'
+                sh './venv/bin/pytest --cov=app --cov-report=term > coverage.txt'
             }
         }
         stage('Fail if Coverage < 80%') {
